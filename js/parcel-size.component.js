@@ -22,7 +22,7 @@ angular.
     '<input class="w3-input" id="cfg-size-depth" type="text" ng-model="$ctrl.parcel.size.height">'+
     '</div>'+
     '</br>'+
-    '<div class="w3-button w3-teal" ng-click="$ctrl.calcSize($ctrl.parcel)" style="cursor: pointer;">'+
+    '<div class="w3-button w3-teal" id="cfg-size-btn" ng-click="$ctrl.calcSize($ctrl.parcel)" style="cursor: pointer;">'+
       'Paketgröße berechnen</div>'+
     '<div class="w3-cell" >'+
       '<label id="cfg-category">Paketgröße: {{$ctrl.parcel.size.category}}</label>'+
