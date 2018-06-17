@@ -60,7 +60,7 @@ angular.
 
       var parameter = JSON.stringify($parcel.size);
       //var url = "http://parcel-api/parcel/size";
-      var url = "http://192.168.99.100:8443/parcel/size";
+      var url = "http://www.allgaeu-parcel-service.com:8443/parcel/size";
       $http.post(url, parameter).then(function(data, status, headers, config) {
           // this callback will be called asynchronously
           // when the response is available
