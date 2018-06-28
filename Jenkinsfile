@@ -5,19 +5,10 @@ node {
 
    }
      stage('Build') { // for display purposes
-      // run gradle build -> happens while docker builds
 
       if (isUnix()) {
-          /* build docker image */
-          IMAGE_EXISTS = sh(
-          script: "docker images -q parcel-asset",
-            returnStatus : true)
-          /* Remove the previous build image */
-          if(IMAGE_EXISTS!=""){
-            sh 'docker rmi -f "193.174.205.28:443/parcel-asset"'
-          }
-          sh 'docker build -t "193.174.205.28:443/parcel-asset" .'
-          sh 'docker image prune -f'
+          /* build docker images */
+          sh 'buildImages.sh "193.174.205.28" $BUILD_NUMBER'
 
       } else {
           /* build docker image */
@@ -31,9 +22,11 @@ node {
    stage('Deploy to registry'){
     if (isUnix()) {
       sh 'docker push "193.174.205.28:443/parcel-asset"'
+      sh 'docker push "193.174.205.28:443/parcel-asset-address"'
+      sh 'docker push "193.174.205.28:443/parcel-asset-option"'
+      sh 'docker push "193.174.205.28:443/parcel-asset-price"'
     } else {
       bat 'docker push "193.174.205.28:443/parcel-asset"'
     }
    }
   }
-

@@ -2,10 +2,10 @@
 
 Build-Befehl:
 ```
-docker build -t ci-cd-asset .
+buildImages.sh
 ```
 
 Startbefehl:
 ```
-docker run -d --restart always --network=parcelnetwork -p 8080:80 --name=parcel-frontend ci-cd-asset
+startImages.sh
 ```
