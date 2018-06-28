@@ -8,7 +8,7 @@ node {
 
       if (isUnix()) {
           /* build docker images */
-          sh 'buildImages.sh "193.174.205.28" $BUILD_NUMBER'
+          sh './buildImages.sh "193.174.205.28" $BUILD_NUMBER'
 
       } else {
           /* build docker image */
