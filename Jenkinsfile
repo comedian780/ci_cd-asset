@@ -8,7 +8,7 @@ node {
 
       if (isUnix()) {
           /* build docker images */
-          sh './buildImages.sh "asset.allgaeu-parcel-service.com" $BUILD_NUMBER'
+          sh './buildImages.sh "asset.allgaeu-parcel-service.com" $BUILD_NUMBER asset-test'
 
       } else {
           /* build docker image */
