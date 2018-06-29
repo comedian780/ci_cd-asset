@@ -40,3 +40,5 @@ docker build -t "${registry_url}:443/parcel-asset" .
 docker tag "${registry_url}:443/parcel-asset" "${registry_url}:443/parcel-asset:0.${build_number}"
 docker image prune -f
 eval $(docker-machine env -u)
+echo "VM URL"
+echo $(docker-machine url $vm_name | grep -oP "tcp://\K[^:]+")
