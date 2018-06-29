@@ -1,6 +1,10 @@
 #!/bin/sh
 
 registry_url=$1
+vm_name=$2
+echo "Changing settings to VM's docker"
+eval $(docker-machine env ${vm_name})
+
 if (! docker network ls | grep parcelassetnetwork); then
   docker network create --driver bridge parcelassetnetwork
 fi
@@ -49,3 +53,5 @@ docker run -d --restart always --network=parcelassetnetwork --name=parcel-asset-
 docker run -d --restart always --network=parcelassetnetwork --name=parcel-asset-price "${registry_url}:443/parcel-asset-price"
 docker run -d --restart always --network=parcelassetnetwork --name=parcel-asset-size "${registry_url}:443/parcel-asset-size"
 docker run -d --restart always --network=parcelassetnetwork -p 8443:80 --name=parcel-asset "${registry_url}:443/parcel-asset"
+
+eval $(docker-machine env -u)
