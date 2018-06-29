@@ -26,6 +26,10 @@ fi
 echo "Creating VM for $vm_name"
 docker-machine create --driver virtualbox $vm_name
 
+eval $(docker-machine env ${vm_name})
+docker run -d -p 443:443 --restart=always --name registry registry:2
+eval $(docker-machine env -u)
+
 create_image $registry_url $build_number address
 create_image $registry_url $build_number option
 create_image $registry_url $build_number price
@@ -39,6 +43,6 @@ echo "Building server image"
 docker build -t "${registry_url}:443/parcel-asset" .
 docker tag "${registry_url}:443/parcel-asset" "${registry_url}:443/parcel-asset:0.${build_number}"
 docker image prune -f
-eval $(docker-machine env -u)
+
 echo "VM URL"
 echo $(docker-machine url $vm_name | grep -oP "tcp://\K[^:]+")
