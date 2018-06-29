@@ -8,7 +8,7 @@ node {
 
       if (isUnix()) {
           /* build docker images */
-          sh './buildImages.sh "asset.allgaeu-parcel-service.com" $BUILD_NUMBER asset-test'
+          sh './buildImages.sh "asset.allgaeu-parcel-service.com" $BUILD_NUMBER parcel-asset-server'
 
       } else {
           /* build docker image */
@@ -21,10 +21,7 @@ node {
    }
    stage('Deploy to registry'){
     if (isUnix()) {
-      sh 'docker push "asset.allgaeu-parcel-service.com:443/parcel-asset"'
-      sh 'docker push "asset.allgaeu-parcel-service.com:443/parcel-asset-address"'
-      sh 'docker push "asset.allgaeu-parcel-service.com:443/parcel-asset-option"'
-      sh 'docker push "asset.allgaeu-parcel-service.com:443/parcel-asset-price"'
+      sh './registerImages.sh "asset.allgaeu-parcel-service.com" parcel-asset-server'
     } else {
       bat 'docker push "asset.allgaeu-parcel-service.com:443/parcel-asset"'
     }

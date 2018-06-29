@@ -17,18 +17,18 @@ create_image(){
   docker tag "${registry_url}:443/parcel-asset-${image_name}" "${registry_url}:443/parcel-asset-${image_name}:0.${build_number}"
 }
 
-if(docker-machine ls -q | grep "^$vm_name\$"); then
-  if(docker-machine status $vm_name | grep "^Running\$"); then
-    docker-machine stop $vm_name
-  fi
-  docker-machine rm $vm_name -y
-fi
-echo "Creating VM for $vm_name"
-docker-machine create --driver virtualbox $vm_name
+#if(docker-machine ls -q | grep "^$vm_name\$"); then
+#  if(docker-machine status $vm_name | grep "^Running\$"); then
+#    docker-machine stop $vm_name
+#  fi
+#  docker-machine rm $vm_name -y
+#fi
+#echo "Creating VM for $vm_name"
+#docker-machine create --driver virtualbox --engine-insecure-registry asset.allgaeu-parcel-service.com:443 $vm_name
 
-eval $(docker-machine env ${vm_name})
-docker run -d -p 443:443 --restart=always --name registry registry:2
-eval $(docker-machine env -u)
+#eval $(docker-machine env ${vm_name})
+#docker run -d -p 443:5000 --restart=always --name registry registry:2
+#eval $(docker-machine env -u)
 
 create_image $registry_url $build_number address
 create_image $registry_url $build_number option
